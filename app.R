@@ -43,7 +43,23 @@ ui <- dashboardPage(
     downloadButton("downloadPCAPlot", "PCA Plot"),
     downloadButton("downloadGOPlot_BP", "GO BP Plot"),
     downloadButton("downloadGOPlot_MF", "GO MF Plot"),
-    downloadButton("downloadGOPlot_CC", "GO CC Plot")
+    downloadButton("downloadGOPlot_CC", "GO CC Plot"),
+    
+    # Developer Info in Sidebar
+    tags$div(
+      style = "padding: 10px; font-size: 0.9em; color: #444;",
+      tags$h4("Developed by", style = "font-weight: bold; margin-bottom: 5px;"),
+      tags$p("Raymond Anan Otoo"),
+      tags$p("Email: ",
+             tags$a(href = "mailto:rotoo@omicsanalyticsgroup.com", "rotoo@omicsanalyticsgroup.com", style = "color: #007bff;", target = "_blank")
+      ),
+      tags$p(
+        tags$a(href = "https://github.com/rayotoo", "GitHub Profile", target = "_blank", style = "color: #007bff; text-decoration: none;"),
+        br(),
+        tags$a(href = "https://www.linkedin.com/in/raymondotoo", "LinkedIn Profile", target = "_blank", style = "color: #007bff; text-decoration: none;")
+      )
+    )
+    
   ),
   dashboardBody(
     useShinyjs(),
