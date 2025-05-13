@@ -296,57 +296,57 @@ server <- function(input, output, session) {
       labs(title = "Volcano Plot", x = "log2 Fold Change", y = "-log10 Adjusted p-value")
   })
   
-output$heatmapPlot <- renderPlot({
-  req(analysis_results()$res_df, analysis_results()$ddsMat_rlog)
-
-  res_df <- analysis_results()$res_df
-  ddsMat_rlog <- analysis_results()$ddsMat_rlog
-
-  significant_genes <- res_df %>%
-    filter(padj < input$pval, abs(log2FoldChange) > input$logfc) %>%
-    rownames()
-
-  filtered_genes <- significant_genes[!grepl("^Gm", significant_genes)]
-
-  if (length(filtered_genes) > 0) {
-    mat <- assay(ddsMat_rlog[filtered_genes, ])
-    if (nrow(mat) > 40) {
-      mat <- mat[1:40, ]
+  output$heatmapPlot <- renderPlot({
+    req(analysis_results()$res_df, analysis_results()$ddsMat_rlog)
+    
+    res_df <- analysis_results()$res_df
+    ddsMat_rlog <- analysis_results()$ddsMat_rlog
+    
+    significant_genes <- res_df %>%
+      filter(padj < input$pval, abs(log2FoldChange) > input$logfc) %>%
+      rownames()
+    
+    filtered_genes <- significant_genes[!grepl("^Gm", significant_genes)]
+    
+    if (length(filtered_genes) > 0) {
+      mat <- assay(ddsMat_rlog[filtered_genes, ])
+      if (nrow(mat) > 40) {
+        mat <- mat[1:40, ]
+      }
+      annotation_col <- data.frame(
+        Group = factor(colData(ddsMat_rlog)$Group),
+        Replicate = factor(colData(ddsMat_rlog)$Replicate),
+        row.names = colData(ddsMat_rlog)$sampleid
+      )
+      
+      ann_colors <- list(
+        Group = c(sham = "lightblue", ir = "purple"),
+        Replicate = c(Rep1 = "red", Rep2 = "green", Rep3 = "blue", Rep4 = "forestgreen", Rep5 = "black")
+      )
+      
+      pheatmap(
+        mat = mat,
+        color = colorRampPalette(c("blue", "white", "red"))(255),
+        scale = "row",
+        annotation_col = annotation_col,
+        annotation_colors = ann_colors,
+        fontsize = 8,
+        show_colnames = TRUE,
+        main = "Heatmap of Top 40 Significant Genes"
+      )
+    } else {
+      plot.new()
+      text(
+        x = 0.5,
+        y = 0.5,
+        "No significant genes to display with current thresholds.",
+        cex = 1,
+        col = "red",
+        adj = c(0.5, 0.5)
+      )
     }
-    annotation_col <- data.frame(
-      Group = factor(colData(ddsMat_rlog)$Group),
-      Replicate = factor(colData(ddsMat_rlog)$Replicate),
-      row.names = colData(ddsMat_rlog)$sampleid
-    )
-
-    ann_colors <- list(
-      Group = c(sham = "lightblue", ir = "purple"),
-      Replicate = c(Rep1 = "red", Rep2 = "green", Rep3 = "blue", Rep4 = "forestgreen", Rep5 = "black")
-    )
-
-    pheatmap(
-      mat = mat,
-      color = colorRampPalette(c("blue", "white", "red"))(255),
-      scale = "row",
-      annotation_col = annotation_col,
-      annotation_colors = ann_colors,
-      fontsize = 8,
-      show_colnames = TRUE,
-      main = "Heatmap of Top 40 Significant Genes"
-    )
-  } else {
-    plot.new()
-    text(
-      x = 0.5,
-      y = 0.5,
-      "No significant genes to display with current thresholds.",
-      cex = 1,
-      col = "red",
-      adj = c(0.5, 0.5)
-    )
-  }
-})
-
+  })
+  
   
   output$pcaPlot <- renderPlot({
     req(analysis_results()$ddsMat_rlog)
@@ -473,7 +473,7 @@ output$heatmapPlot <- renderPlot({
     filename = "volcano_plot.png",
     content = function(file) {
       req(analysis_results()$res_df)
-      ggsave(file, plot = output$volcanoPlot(), device = "png", width = 8, height = 6, units = "in", dpi = 300)
+      ggsave(file, plot = output$volcanoPlot, device = "png", width = 8, height = 6, units = "in", dpi = 300)
     }
   )
   
@@ -528,7 +528,7 @@ output$heatmapPlot <- renderPlot({
     filename = "pca_plot.png",
     content = function(file) {
       req(analysis_results()$ddsMat_rlog)
-      ggsave(file, plot = output$pcaPlot(), device = "png", width = 8, height = 6, units = "in", dpi = 300)
+      ggsave(file, plot = output$pcaPlot, device = "png", width = 8, height = 6, units = "in", dpi = 300)
     }
   )
   
