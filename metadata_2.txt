@@ -1,0 +1,11 @@
+SampleID	Group	Replicate
+JvRad_Rhipp_504	sham	Rep1
+JvRad_Rhipp_503	sham	Rep2
+JvRad_Rhipp_402	sham	Rep3
+JvRad_Rhipp_401	sham	Rep4
+JvRad_Rhipp_400	sham	Rep5
+JvRad_Rhipp_204	ir	Rep1
+JvRad_Rhipp_203	ir	Rep2
+JvRad_Rhipp_202	ir	Rep3
+JvRad_Rhipp_201	ir	Rep4
+JvRad_Rhipp_200	ir	Rep5
