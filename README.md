@@ -1,4 +1,3 @@
-[![R](https://github.com/rayotoo/RNAseq-shiny-interactive/actions/workflows/r.yml/badge.svg)](https://github.com/rayotoo/RNAseq-shiny-interactive/actions/workflows/r.yml)
 
 # 🧬 RNA-seq Differential Expression Explorer (R Shiny App)
 
