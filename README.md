@@ -21,4 +21,8 @@ This R Shiny application provides an interactive interface for exploring RNA-seq
 ---
 
 ## 📁 File Structure
-
+rna_seq_shiny_app/
+├── app.R # Main Shiny app
+├── final_counts.txt # Count matrix from featureCounts
+├── metadata_2.txt # Metadata with sample groupings
+├── README.md # This file
