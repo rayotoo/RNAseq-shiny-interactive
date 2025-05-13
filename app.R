@@ -18,7 +18,7 @@ colnames(countdata) <- substr(colnames(countdata), 1, 17)
 colnames(countdata) <- gsub("^\\.\\.", "", colnames(countdata))
 countdata <- countdata[, -c(1:5)]
 
-metadata <- read.delim("metadata_2.txt", row.names = 1)
+metadata <- read.delim("metadata.txt", row.names = 1)
 metadata$sampleid <- row.names(metadata)
 metadata <- metadata[match(colnames(countdata), metadata$sampleid), ]
 
