@@ -1,3 +1,5 @@
+[![R](https://github.com/rayotoo/RNAseq-shiny-interactive/actions/workflows/r.yml/badge.svg)](https://github.com/rayotoo/RNAseq-shiny-interactive/actions/workflows/r.yml)
+
 # 🧬 RNA-seq Differential Expression Explorer (R Shiny App)
 
 This R Shiny application provides an interactive interface for exploring RNA-seq differential expression results using DESeq2. It allows users to visualize and download key analysis outputs such as volcano plots, PCA, heatmaps, and Gene Ontology (GO) enrichment results.
